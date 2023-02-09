@@ -2,8 +2,11 @@
 # PATH
 # ==============================================================================
 
-UTILS	:= utils
-
+PHILO 			:= philo
+UTILS			:= $(PHILO)/utils
+ARGS_VALIDATION := $(PHILO)/args_validation
+THREADS_PHILO	:= $(PHILO)/threads_philo
+FREE_PROGRAM	:= $(PHILO)/free_program
 
 # ==============================================================================
 # VARIABLES
@@ -12,9 +15,12 @@ UTILS	:= utils
 NAME	:=	philosophers
 CC		:=	cc
 CFLAGS	:=	-g3 -Wall -Werror -Wextra
-HEADERS	:=	philo/includes
-SRCS	:=	philo/philosophers.c \
-			$(UTILS)/ft_atoi.c
+HEADERS	:=	$(PHILO)/includes
+SRCS	:=	$(PHILO)/philosophers.c \
+			$(UTILS)/ft_atoi.c \
+			$(ARGS_VALIDATION)/args_validation.c \
+			$(THREADS_PHILO)/threads_philo.c \
+			$(FREE_PROGRAM)/free_program.c
 OBJS	:=	$(SRCS:.c=.o)
 
 # ==============================================================================

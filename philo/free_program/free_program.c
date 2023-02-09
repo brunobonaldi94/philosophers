@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   free_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 22:33:36 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/01 22:41:05 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/08 22:35:12 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/08 22:40:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <check.h>
+#include "philosophers.h"
 
-int test()
+void	ft_free_philosophers(t_philo *philo)
 {
-	return (0);
+	free(philo->ph);
 }
