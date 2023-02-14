@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_validation.c                                  :+:      :+:    :+:   */
+/*   args_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 21:40:31 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/13 21:44:59 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/06 22:21:52 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/06 22:22:04 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_bool	ft_advance_plus_sign(char **str)
+
+void	ft_load_args(t_philo *philos, char *argv[], t_bool has_five_args)
 {
-	if (**str == '+')
-		(*str)++;
-	if (!**str)
-		return (FALSE);
-	return (TRUE);
+	philos->nbr_philos = ft_atoi(argv[1]);
+	philos->time_die = ft_atoi(argv[2]);
+	philos->time_eat = ft_atoi(argv[3]);
+	philos->time_sleep = ft_atoi(argv[4]);
+	if (has_five_args)
+		philos->nbr_times_must_eat = ft_atoi(argv[4]);
 }
 
 t_bool	ft_is_number(char *str)
 {
-	if (!ft_advance_plus_sign(&str))
-		return (FALSE);
 	while (*str)
 	{
 		if (!(*str >= '0' && *str <= '9'))
@@ -57,7 +57,7 @@ t_bool	ft_has_valid_args(int argc, char *argv[])
 	}
 	if (!ft_is_all_number(argv))
 	{
-		printf("All arguments must be numeric!\n");
+		printf("All args must be numeric!\n");
 		return (FALSE);
 	}
 	return (TRUE);

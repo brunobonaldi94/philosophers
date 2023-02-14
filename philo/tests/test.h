@@ -1,29 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_program.c                                     :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 22:35:12 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/13 23:16:15 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/06 20:50:43 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/06 22:12:10 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
+#include <check.h>
 
-void	ft_free_philo_actions(t_philo *philo)
-{
-	size_t	index;
-
-	index = 0;
-	while (philo->philo_actions[index])
-		free(philo->philo_actions[index++]);
-	free(philo->philo_actions);
-}
-
-void	ft_free_philosophers(t_philo *philo)
-{
-	free(philo->ph);
-	ft_free_philo_actions(philo);
-}

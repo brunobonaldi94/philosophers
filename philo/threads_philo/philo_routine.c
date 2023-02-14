@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_program.c                                     :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 22:35:12 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/13 23:16:15 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/13 22:52:28 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_free_philo_actions(t_philo *philo)
+void	ft_eat_routine(t_philo *philo)
 {
-	size_t	index;
-
-	index = 0;
-	while (philo->philo_actions[index])
-		free(philo->philo_actions[index++]);
-	free(philo->philo_actions);
+	return ;
 }
 
-void	ft_free_philosophers(t_philo *philo)
+void	ft_sleep_routine()
 {
-	free(philo->ph);
-	ft_free_philo_actions(philo);
+	return ;
+}
+
+void	ft_think_routine()
+{
+	return ;
 }

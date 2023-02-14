@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/08 23:02:03 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/02/13 23:18:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,40 @@
 
 void	*ft_routine(void *philo)
 {
-	t_philosophers	phil;
+	t_philo_id	philo_id;
 
-	phil = *(t_philosophers *)philo;
-	printf("philo %ld\n", phil.id);
+	philo_id = *(t_philo_id *)philo;
+	pthread_mutex_lock(&philo_id.philo->forks_mutex);
+	printf("philo %ld\n", philo_id.id);
+	pthread_mutex_unlock(&philo_id.philo->forks_mutex);
+	free(philo);
 	return (NULL);
+}
+
+void	*ft_routine_lonely_philo(void *philo)
+{
+
 }
 
 t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 {
-	size_t	index;
+	size_t		index;
+	t_philo_id	*philo_id; 
 
 	index = 0;
+	if (nbr_philos == 1)
+	{
+		if (pthread_create(&philo->ph[index].t, NULL,
+				ft_routine_lonely_philo, philo) != 0)
+	}
 	while (index < nbr_philos)
 	{
+		philo_id = (t_philo_id *)malloc(sizeof(t_philo_id));
+		philo_id->philo = philo;
 		philo->ph[index].id = index;
+		philo_id->id = index;
 		if (pthread_create(&philo->ph[index].t, NULL,
-				ft_routine, &philo->ph[index]) != 0)
+				ft_routine, philo_id) != 0)
 			return (FALSE);
 		index++;
 	}

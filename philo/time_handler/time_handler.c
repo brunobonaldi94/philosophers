@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_program.c                                     :+:      :+:    :+:   */
+/*   time_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 22:35:12 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/13 23:16:15 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/13 21:03:13 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/13 21:54:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_free_philo_actions(t_philo *philo)
+t_time_ms	get_time_ms(void)
 {
-	size_t	index;
+	t_timeval	current_time;
 
-	index = 0;
-	while (philo->philo_actions[index])
-		free(philo->philo_actions[index++]);
-	free(philo->philo_actions);
+	gettimeofday(&current_time, NULL);
+	return ((((long long)current_time.tv_sec) * 1000)
+		+ (current_time.tv_usec / 1000));
 }
 
-void	ft_free_philosophers(t_philo *philo)
+t_time_ms	get_elapsed_time(time_t start_time)
 {
-	free(philo->ph);
-	ft_free_philo_actions(philo);
+	return (get_time_ms() - start_time);
 }
