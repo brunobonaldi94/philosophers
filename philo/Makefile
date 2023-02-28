@@ -17,11 +17,11 @@ CC		:=	cc
 CFLAGS	:=	-g3 -Wall -Werror -Wextra
 HEADERS	:=	includes
 SRCS	:=	philosophers.c \
-			$(UTILS)/ft_atoi.c \
+			$(UTILS)/ft_atoi.c $(UTILS)/ft_strdup.c \
 			$(ARGS_VALIDATION)/args_validation.c \
-			$(TIME_HANDLER)time_handler.c \
+			$(TIME_HANDLER)/time_handler.c \
 			$(THREADS_PHILO)/threads_philo.c $(THREADS_PHILO)/philo_loggers.c \
-			$(THREADS_PHILO)/philo_routine.c \
+			$(THREADS_PHILO)/philo_routine.c  $(THREADS_PHILO)/philo_mutex.c \
 			$(FREE_PROGRAM)/free_program.c
 OBJS	:=	$(SRCS:.c=.o)
 

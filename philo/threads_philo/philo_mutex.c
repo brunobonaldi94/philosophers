@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_handler.c                                     :+:      :+:    :+:   */
+/*   philo_mutex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 21:03:13 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/27 23:07:00 by bbonaldi         ###   ########.fr       */
+/*   Created: 2023/02/27 21:18:25 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/02/27 21:18:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_time_ms	ft_get_time_ms(void)
+void	ft_init_mutex(t_philo *philo)
 {
-	t_timeval	current_time;
+	size_t	index;
 
-	gettimeofday(&current_time, NULL);
-	return ((((long long)current_time.tv_sec) * 1000)
-		+ (current_time.tv_usec / 1000));
+	index = 0;
+	while (index < philo->nbr_philos)
+	{
+		pthread_mutex_init(&philo->ph[index].forks_mutex, NULL);
+		index++;
+	}
 }
 
-t_time_ms	ft_get_elapsed_time(t_time_ms start_time)
+void	ft_destroy_mutex(t_philo *philo)
 {
-	return (ft_get_time_ms() - start_time);
+	size_t	index;
+
+	index = 0;
+	while (index < philo->nbr_philos)
+	{
+		pthread_mutex_destroy(&philo->ph[index].forks_mutex);
+		index++;
+	}
 }

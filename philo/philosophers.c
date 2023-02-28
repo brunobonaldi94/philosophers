@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 01:46:44 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/13 23:14:13 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:35:25 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ number_of_philosophers time_to_die time_to_eat time_to_sleep
 void	ft_assign_philo_actions(t_philo *philo)
 {
 	philo->philo_actions = (char **)malloc(sizeof(char *) * (NBR_ACTIONS + 1));
-	philo->philo_actions[EATING] = ft_strdup("eating");
-	philo->philo_actions[THINKING] = ft_strdup("thinking");
-	philo->philo_actions[SLEEPING] = ft_strdup("sleeping");
-	philo->philo_actions[DIED] = ft_strdup("dead");
-	philo->philo_actions[4] = NULL;
+	philo->philo_actions[EATING] = ft_strdup("is eating");
+	philo->philo_actions[THINKING] = ft_strdup("is thinking");
+	philo->philo_actions[SLEEPING] = ft_strdup("is sleeping");
+	philo->philo_actions[DIED] = ft_strdup("died");
+	philo->philo_actions[FORK] = ft_strdup("has taken a fork");
+	philo->philo_actions[NBR_ACTIONS] = NULL;
 }
 
 void	ft_load_args(t_philo *philos, char *argv[], t_bool has_five_args)
