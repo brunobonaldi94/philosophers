@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 01:46:44 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/27 22:35:25 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/06 22:57:20 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_load_args(t_philo *philos, char *argv[], t_bool has_five_args)
 	philos->time_eat = ft_atoi(argv[3]);
 	philos->time_sleep = ft_atoi(argv[4]);
 	if (has_five_args)
-		philos->nbr_times_must_eat = ft_atoi(argv[4]);
+		philos->nbr_times_must_eat = ft_atoi(argv[5]);
 	ft_assign_philo_actions(philos);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/27 23:04:39 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/06 23:36:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,35 @@
 
 void	*ft_routine(void *philo)
 {
-	t_philo_id	philo_id;
+	t_cur_philo	*p;
 
-	philo_id = *(t_philo_id *)philo;
-	//pthread_mutex_lock(&philo_id.philo->forks_mutex);
-	printf("philo %ld\n", philo_id.id);
-	//pthread_mutex_unlock(&philo_id.philo->forks_mutex);
+	p = (t_cur_philo *)philo;
+	ft_eat_routine(p->philo, p->cur_philo->id);
 	free(philo);
 	return (NULL);
 }
 
 void	*ft_routine_only_one_philo(void *philo)
 {
-	ft_eat_routine(philo, 0);
-	ft_sleep_routine(philo,  0);
-	ft_log_philo(philo, 1, DIED);
+	t_philo	*p;
+	int		philo_id;
+
+	p = (t_philo *)philo;
+	philo_id = 1;
+	ft_eat_routine(p, philo_id);
+	ft_usleep(p->ph[philo_id - 1].time_die);
+	ft_log_philo(p, philo_id, DIED);
 	return (NULL);
 }
 
 void	ft_assign_philo_timers(t_philo *philo)
 {
-	size_t	index;
+	int	index;
 
 	index = 0;
 	while (index < philo->nbr_philos)
 	{
+		philo->ph[index].id = index + 1;
 		philo->ph[index].time_die = philo->time_die;
 		philo->ph[index].time_eat = philo->time_eat;
 		philo->ph[index].time_sleep = philo->time_sleep;
@@ -50,7 +54,7 @@ void	ft_assign_philo_timers(t_philo *philo)
 t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 {
 	size_t		index;
-	t_philo_id	*philo_id; 
+	t_cur_philo	*cur_philo; 
 
 	index = 0;
 	philo->dinning_start = ft_get_time_ms();
@@ -64,12 +68,11 @@ t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 	}
 	while (index < nbr_philos)
 	{
-		philo_id = (t_philo_id *)malloc(sizeof(t_philo_id));
-		philo_id->philo = philo;
-		philo->ph[index].id = index;
-		philo_id->id = index;
+		cur_philo = (t_cur_philo *)malloc(sizeof(t_cur_philo));
+		cur_philo->philo = philo;
+		cur_philo->cur_philo = &philo->ph[index];
 		if (pthread_create(&philo->ph[index].ph_thread, NULL,
-				ft_routine, philo_id) != 0)
+				ft_routine, cur_philo) != 0)
 			return (FALSE);
 		index++;
 	}

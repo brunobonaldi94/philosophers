@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/02/27 22:59:55 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/05 17:17:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_log_philo(t_philo *philo, int philo_id, t_philo_status cur_status);
 // =============================================================================
 t_time_ms	ft_get_time_ms(void);
 t_time_ms	ft_get_elapsed_time(t_time_ms start_time);
+void		ft_usleep(t_time_ms end_time);
 // =============================================================================
 // FREE PROGRAM
 // =============================================================================

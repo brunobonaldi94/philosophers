@@ -6,14 +6,14 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 21:06:03 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/27 22:34:04 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/06 23:07:31 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct timeval t_timeval;
+typedef struct	timeval t_timeval;
 typedef time_t	t_time_ms;
 typedef enum e_philo_status
 {
@@ -34,8 +34,8 @@ typedef enum e_bool
 typedef struct s_philosophers
 {
 	pthread_t		ph_thread;
-	size_t			id;
-	int				fork[2];
+	int				id;
+	int				fork;
 	size_t			time_die;
 	size_t			time_eat;
 	size_t			time_sleep;
@@ -46,21 +46,22 @@ typedef struct s_philosophers
 
 typedef struct s_philo
 {
-	size_t			nbr_philos;
-	size_t			nbr_forks;
+	int				nbr_philos;
+	int				nbr_forks;
 	size_t			time_die;
 	size_t			time_eat;
 	size_t			time_sleep;
 	size_t			nbr_times_must_eat;
 	t_philosophers	*ph;
 	t_time_ms		dinning_start;
+	pthread_mutex_t	logger_mutex;
 	char			**philo_actions;
 }	t_philo;
 
-typedef	struct s_philo_id
+typedef	struct s_cur_philo
 {
 	t_philo			*philo;
-	size_t			id;
-}	t_philo_id;
+	t_philosophers	*cur_philo;
+}	t_cur_philo;
 
 #endif
