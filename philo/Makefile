@@ -22,6 +22,7 @@ SRCS	:=	philosophers.c \
 			$(TIME_HANDLER)/time_handler.c \
 			$(THREADS_PHILO)/threads_philo.c $(THREADS_PHILO)/philo_loggers.c \
 			$(THREADS_PHILO)/philo_routine.c  $(THREADS_PHILO)/philo_mutex.c \
+			$(THREADS_PHILO)/philo_watcher.c \
 			$(FREE_PROGRAM)/free_program.c
 OBJS	:=	$(SRCS:.c=.o)
 

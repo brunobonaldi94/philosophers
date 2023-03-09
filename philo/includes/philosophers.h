@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/05 17:17:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/08 21:45:50 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_sleep_routine(t_philo *philo, int philo_id);
 // PHILO LOGGERS
 // =============================================================================
 void	ft_log_philo(t_philo *philo, int philo_id, t_philo_status cur_status);
+void	ft_print_args(t_philo *philo);
 // =============================================================================
 // TIME
 // =============================================================================
@@ -76,4 +77,8 @@ void	ft_free_philosophers(t_philo *philo);
 // =============================================================================
 void	ft_init_mutex(t_philo *philo);
 void	ft_destroy_mutex(t_philo *philo);
+// =============================================================================
+// PHILO MUTEX
+// =============================================================================
+t_bool	ft_init_watcher(t_philo *philo);
 #endif
