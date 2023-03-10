@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/08 21:45:50 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:58:44 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	ft_create_philosophers(t_philo *philo, size_t nbr_philos);
 // =============================================================================
 void	ft_eat_routine(t_philo *philo, int philo_id);
 void	ft_sleep_routine(t_philo *philo, int philo_id);
+void	ft_think_routine(t_philo *philo, int philo_id);
+void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2]);
 // =============================================================================
 // PHILO LOGGERS
 // =============================================================================
@@ -77,6 +79,9 @@ void	ft_free_philosophers(t_philo *philo);
 // =============================================================================
 void	ft_init_mutex(t_philo *philo);
 void	ft_destroy_mutex(t_philo *philo);
+t_bool	ft_should_stop_dinner(t_philo *philo);
+void	ft_stop_dinner(t_philo *philo, t_bool should_stop_dinner);
+t_bool	ft_should_die(t_philo *philo, int philo_id);
 // =============================================================================
 // PHILO MUTEX
 // =============================================================================

@@ -63,7 +63,7 @@ fclean:		clean
 re:			fclean all
 
 valgrind:
-			@valgrind -s --leak-check=full --show-leak-kinds=all \
-			--track-origins=yes --trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
+			@valgrind --tool=helgrind -s --log-fd=9 ./$(NAME) \
+			2 3000 200 300 5 9>memcheck.log
 
 .PHONY:		all clean fclean re

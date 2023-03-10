@@ -6,47 +6,76 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/08 23:08:01 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/09 22:48:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_log_eating(t_philo *philo, int philo_id)
+t_bool	ft_log_eating(t_philo *philo, int philo_id)
 {
+	if (ft_should_stop_dinner(philo))
+		return (FALSE);
 	ft_log_philo(philo, philo_id, FORK);
 	ft_log_philo(philo, philo_id, FORK);
+	if (philo->time_eat > philo->time_die)
+	{
+		ft_usleep(philo->time_die);
+		ft_log_philo(philo, philo_id, DIED);
+		ft_stop_dinner(philo, TRUE);
+		return (FALSE);
+	}
 	ft_log_philo(philo, philo_id, EATING);
+	return (TRUE);
+}
+
+void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
+{
+	if (philo_id == nbr_philos)
+	{
+		forks[0] = philo_id - 1;
+		forks[1] = 0;
+	}
+	else 
+	{
+		forks[0] = philo_id - 1;
+		forks[1] = philo_id;
+	}
+}
+
+void	set_meal_time(t_philo *philo, int philo_id)
+{
+	pthread_mutex_lock(&philo->ph[philo_id -1].last_meal_mutex);
+	philo->ph[philo_id -1].last_meal_time = ft_get_time_ms(); 
+	pthread_mutex_unlock(&philo->ph[philo_id -1].last_meal_mutex);
 }
 
 void	ft_get_fork(t_philo *philo, int philo_id)
 {
-	int	fork_one;
-	int	fork_two;
+	int	forks[2];
 
-	if (philo_id == philo->nbr_philos)
-	{
-		fork_one = philo_id - 1;
-		fork_two = 0;
-	}
-	else 
-	{
-		fork_one = philo_id - 1;
-		fork_two = philo_id;
-	}
-	pthread_mutex_lock(&philo->ph[fork_one].forks_mutex);
-	pthread_mutex_lock(&philo->ph[fork_two].forks_mutex);
-	philo->ph[philo_id -1].last_meal_time = ft_get_time_ms(); 
+	if (ft_should_stop_dinner(philo))
+		return ;
+	ft_assign_forks(philo->nbr_philos, philo_id, forks);
+	pthread_mutex_lock(&philo->ph[forks[0]].forks_mutex);
+	pthread_mutex_lock(&philo->ph[forks[1]].forks_mutex);
 	philo->ph[philo_id -1].nbr_times_must_eat--;
-	ft_log_eating(philo, philo_id);
+	if (!ft_log_eating(philo, philo_id))
+	{
+		pthread_mutex_unlock(&philo->ph[forks[0]].forks_mutex);
+		pthread_mutex_unlock(&philo->ph[forks[1]].forks_mutex);
+		return ;
+	}
 	ft_usleep(philo->ph[philo_id - 1].time_eat);
-	pthread_mutex_unlock(&philo->ph[fork_one].forks_mutex);
-	pthread_mutex_unlock(&philo->ph[fork_two].forks_mutex);
+	set_meal_time(philo, philo_id);
+	pthread_mutex_unlock(&philo->ph[forks[0]].forks_mutex);
+	pthread_mutex_unlock(&philo->ph[forks[1]].forks_mutex);
 }
 
 void	ft_eat_routine(t_philo *philo, int philo_id)
 {
-
+	if (ft_should_stop_dinner(philo))
+		return ;
 	if (philo->nbr_forks == 1)
 		ft_log_philo(philo, philo_id, FORK);
 	else
@@ -55,14 +84,16 @@ void	ft_eat_routine(t_philo *philo, int philo_id)
 
 void	ft_sleep_routine(t_philo *philo, int philo_id)
 {
-	if (philo->ph[philo_id - 1].should_stop_dinner)
+	if (ft_should_stop_dinner(philo) || ft_should_die(philo, philo_id))
 		return ;
-	ft_usleep(philo->ph[philo_id - 1].time_sleep);
 	ft_log_philo(philo, philo_id, SLEEPING);
+	ft_usleep(philo->ph[philo_id - 1].time_sleep);
 	return ;
 }
 
-void	ft_think_routine()
+void	ft_think_routine(t_philo *philo, int philo_id)
 {
-	return ;
+	if (ft_should_stop_dinner(philo))
+		return ;
+	ft_log_philo(philo, philo_id, THINKING);
 }
