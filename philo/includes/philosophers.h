@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/09 21:58:44 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:41:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,31 @@
 // =============================================================================
 // UTILS
 // =============================================================================
-int		ft_atoi(const char *nptr);
-char	*ft_strdup(const char *s);
+int			ft_atoi(const char *nptr);
+char		*ft_strdup(const char *s);
 // =============================================================================
 // ARGS VALIDATION
 // =============================================================================
-t_bool	ft_has_valid_args(int argc, char *argv[]);
+t_bool		ft_has_valid_args(int argc, char *argv[]);
 
 // =============================================================================
 // THREADS
 // =============================================================================
-void	ft_create_philosophers(t_philo *philo, size_t nbr_philos);
+void		ft_create_philosophers(t_philo *philo, size_t nbr_philos);
 
 // =============================================================================
 // PHILO ROUTINE
 // =============================================================================
-void	ft_eat_routine(t_philo *philo, int philo_id);
-void	ft_sleep_routine(t_philo *philo, int philo_id);
-void	ft_think_routine(t_philo *philo, int philo_id);
-void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2]);
+void		ft_eat_routine(t_philo *philo, int philo_id);
+void		ft_sleep_routine(t_philo *philo, int philo_id);
+void		ft_think_routine(t_philo *philo, int philo_id);
+void		ft_assign_forks(int nbr_philos, int philo_id, int forks[2]);
 // =============================================================================
 // PHILO LOGGERS
 // =============================================================================
-void	ft_log_philo(t_philo *philo, int philo_id, t_philo_status cur_status);
-void	ft_print_args(t_philo *philo);
+void		ft_log_philo(t_philo *philo, int philo_id,
+				t_philo_status cur_status);
+void		ft_print_args(t_philo *philo);
 // =============================================================================
 // TIME
 // =============================================================================
@@ -73,17 +74,17 @@ void		ft_usleep(t_time_ms end_time);
 // =============================================================================
 // FREE PROGRAM
 // =============================================================================
-void	ft_free_philosophers(t_philo *philo);
+void		ft_free_philosophers(t_philo *philo);
 // =============================================================================
 // PHILO MUTEX
 // =============================================================================
-void	ft_init_mutex(t_philo *philo);
-void	ft_destroy_mutex(t_philo *philo);
-t_bool	ft_should_stop_dinner(t_philo *philo);
-void	ft_stop_dinner(t_philo *philo, t_bool should_stop_dinner);
-t_bool	ft_should_die(t_philo *philo, int philo_id);
+void		ft_init_mutex(t_philo *philo);
+void		ft_destroy_mutex(t_philo *philo);
+t_bool		ft_should_stop_dinner(t_philo *philo);
+void		ft_stop_dinner(t_philo *philo, t_bool should_stop_dinner);
+t_bool		ft_should_die(t_philo *philo, int philo_id);
 // =============================================================================
 // PHILO MUTEX
 // =============================================================================
-t_bool	ft_init_watcher(t_philo *philo);
+t_bool		ft_init_watcher(t_philo *philo);
 #endif

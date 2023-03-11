@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:19:27 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/09 22:43:59 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:42:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ t_bool	ft_should_die(t_philo *philo, int philo_id)
 
 	cur_ph = &philo->ph[philo_id -1];
 	pthread_mutex_lock(&cur_ph->last_meal_mutex);
-	should_die = (cur_ph->last_meal_time != 0 && 
-		ft_get_elapsed_time(cur_ph->last_meal_time) 
-		>= (t_time_ms)cur_ph->time_die);
+	should_die = (ft_get_elapsed_time(cur_ph->last_meal_time)
+			>= (t_time_ms)cur_ph->time_die);
 	if (should_die)
 		ft_log_philo(philo, cur_ph->id, DIED);
 	pthread_mutex_unlock(&cur_ph->last_meal_mutex);
@@ -73,7 +72,7 @@ t_bool	ft_watch_philo(t_philo *philo)
 	{
 		if (ft_should_end_dinner(philo))
 		{
-			ft_stop_dinner(philo, TRUE);				
+			ft_stop_dinner(philo, TRUE);
 			return (FALSE);
 		}
 	}
@@ -93,6 +92,6 @@ t_bool	ft_init_watcher(t_philo *philo)
 {
 	if (pthread_create(&philo->p_watcher, NULL,
 			ft_watcher_routine, philo) != 0)
-			return (FALSE);
+		return (FALSE);
 	return (TRUE);
 }

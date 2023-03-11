@@ -6,12 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/09 21:53:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:53:12 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
 
 void	ft_assign_philo_actions(t_philo *philo)
 {
@@ -71,7 +70,7 @@ void	ft_assign_philo_timers(t_philo *philo)
 t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 {
 	size_t		index;
-	t_cur_philo	*cur_philo; 
+	t_cur_philo	*cur_philo;
 
 	index = 0;
 	philo->dinner_start = ft_get_time_ms();
@@ -80,7 +79,7 @@ t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 	if (nbr_philos == 1)
 	{
 		if (pthread_create(&philo->ph[index].ph_thread, NULL,
-			ft_routine_only_one_philo, philo) != 0)
+				ft_routine_only_one_philo, philo) != 0)
 			return (FALSE);
 		return (TRUE);
 	}
@@ -88,7 +87,7 @@ t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 	{
 		cur_philo = (t_cur_philo *)malloc(sizeof(t_cur_philo));
 		cur_philo->philo = philo;
-		philo->ph[index].last_meal_time = 0;
+		philo->ph[index].last_meal_time = ft_get_time_ms();
 		cur_philo->cur_philo = &philo->ph[index];
 		if (pthread_create(&philo->ph[index].ph_thread, NULL,
 				ft_routine, cur_philo) != 0)

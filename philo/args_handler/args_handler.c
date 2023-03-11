@@ -6,12 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 22:21:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/06 22:22:04 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:37:52 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
 
 void	ft_load_args(t_philo *philos, char *argv[], t_bool has_five_args)
 {

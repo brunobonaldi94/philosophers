@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/09 22:48:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:52:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 t_bool	ft_log_eating(t_philo *philo, int philo_id)
 {
-	if (ft_should_stop_dinner(philo))
+	if (ft_should_stop_dinner(philo)
+		|| ft_get_elapsed_time(philo->ph[philo_id - 1].last_meal_time)
+		>= (t_time_ms)philo->ph[philo_id - 1].time_die)
 		return (FALSE);
 	ft_log_philo(philo, philo_id, FORK);
 	ft_log_philo(philo, philo_id, FORK);
@@ -36,7 +38,7 @@ void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
 		forks[0] = philo_id - 1;
 		forks[1] = 0;
 	}
-	else 
+	else
 	{
 		forks[0] = philo_id - 1;
 		forks[1] = philo_id;
@@ -45,9 +47,12 @@ void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
 
 void	set_meal_time(t_philo *philo, int philo_id)
 {
-	pthread_mutex_lock(&philo->ph[philo_id -1].last_meal_mutex);
-	philo->ph[philo_id -1].last_meal_time = ft_get_time_ms(); 
-	pthread_mutex_unlock(&philo->ph[philo_id -1].last_meal_mutex);
+	philo->ph[philo_id -1].last_meal_time = ft_get_time_ms();
+}
+
+void	ft_adjust_nbr_times_must_eat(t_philo *philo, int philo_id)
+{
+	philo->ph[philo_id -1].nbr_times_must_eat--;
 }
 
 void	ft_get_fork(t_philo *philo, int philo_id)
@@ -59,15 +64,18 @@ void	ft_get_fork(t_philo *philo, int philo_id)
 	ft_assign_forks(philo->nbr_philos, philo_id, forks);
 	pthread_mutex_lock(&philo->ph[forks[0]].forks_mutex);
 	pthread_mutex_lock(&philo->ph[forks[1]].forks_mutex);
-	philo->ph[philo_id -1].nbr_times_must_eat--;
+	pthread_mutex_lock(&philo->ph[philo_id -1].last_meal_mutex);
+	ft_adjust_nbr_times_must_eat(philo, philo_id);
 	if (!ft_log_eating(philo, philo_id))
 	{
 		pthread_mutex_unlock(&philo->ph[forks[0]].forks_mutex);
 		pthread_mutex_unlock(&philo->ph[forks[1]].forks_mutex);
+		ft_stop_dinner(philo, TRUE);
 		return ;
 	}
-	ft_usleep(philo->ph[philo_id - 1].time_eat);
 	set_meal_time(philo, philo_id);
+	pthread_mutex_unlock(&philo->ph[philo_id -1].last_meal_mutex);
+	ft_usleep(philo->ph[philo_id - 1].time_eat);
 	pthread_mutex_unlock(&philo->ph[forks[0]].forks_mutex);
 	pthread_mutex_unlock(&philo->ph[forks[1]].forks_mutex);
 }
