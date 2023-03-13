@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:19:27 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/11 15:42:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:54:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	*ft_watcher_routine(void *philo)
 
 t_bool	ft_init_watcher(t_philo *philo)
 {
+	if (philo->nbr_philos == 1)
+		return (FALSE);
 	if (pthread_create(&philo->p_watcher, NULL,
 			ft_watcher_routine, philo) != 0)
 		return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/11 16:53:12 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:54:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_bool	ft_join_philosophers(t_philo *philo, size_t nbr_philos)
 			return (FALSE);
 		index++;
 	}
-	if (pthread_join(philo->p_watcher, NULL) != 0)
+	if (nbr_philos != 1 && pthread_join(philo->p_watcher, NULL) != 0)
 		return (FALSE);
 	return (TRUE);
 }
