@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:18:25 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/13 22:21:59 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:53:12 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_mutex(t_philo *philo)
 	while (index < philo->nbr_philos)
 	{
 		pthread_mutex_init(&philo->ph[index].forks_mutex, NULL);
+		pthread_mutex_init(&philo->ph[index].eaten_time_mutex, NULL);
 		pthread_mutex_init(&philo->ph[index].last_meal_mutex, NULL);
 		index++;
 	}
@@ -37,6 +38,7 @@ void	ft_destroy_mutex(t_philo *philo)
 	while (index < philo->nbr_philos)
 	{
 		pthread_mutex_destroy(&philo->ph[index].forks_mutex);
+		pthread_mutex_destroy(&philo->ph[index].eaten_time_mutex);
 		pthread_mutex_destroy(&philo->ph[index].last_meal_mutex);
 		index++;
 	}

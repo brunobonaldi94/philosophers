@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 21:06:03 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/13 23:07:01 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:53:12 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philosophers
 	t_philo_status	cur_status;
 	pthread_mutex_t	forks_mutex;
 	pthread_mutex_t	last_meal_mutex;
+	pthread_mutex_t	eaten_time_mutex;
 }	t_philosophers;
 
 typedef struct s_philo

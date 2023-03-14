@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:19:27 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/13 21:33:20 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:52:59 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ t_bool	ft_check_all_philosophers_eaten_x_times(t_philo *philo)
 	index = 0;
 	while (index < philo->nbr_philos)
 	{
+		pthread_mutex_lock(&philo->ph[index].eaten_time_mutex);
 		if (philo->ph[index].nbr_times_must_eat > 0
 			|| philo->ph[index].nbr_times_must_eat == -1)
+		{
+			pthread_mutex_unlock(&philo->ph[index].eaten_time_mutex);
 			return (FALSE);
+		}
+		pthread_mutex_unlock(&philo->ph[index].eaten_time_mutex);
 		index++;
 	}
 	return (TRUE);

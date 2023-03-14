@@ -64,6 +64,7 @@ re:			fclean all
 
 valgrind:
 			@valgrind --tool=helgrind -s --log-fd=9 ./$(NAME) \
-			3 400 100 100 7  9>memcheck.log
+			4 210 100 100 7  9>memcheck.log
+#3 400 100 100 7  9>memcheck.log
 
 .PHONY:		all clean fclean re
