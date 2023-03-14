@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/11 15:41:22 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:12:08 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		ft_destroy_mutex(t_philo *philo);
 t_bool		ft_should_stop_dinner(t_philo *philo);
 void		ft_stop_dinner(t_philo *philo, t_bool should_stop_dinner);
 t_bool		ft_should_die(t_philo *philo, int philo_id);
+t_bool		ft_die_condition(t_philosophers	*cur_ph);
 // =============================================================================
 // PHILO MUTEX
 // =============================================================================

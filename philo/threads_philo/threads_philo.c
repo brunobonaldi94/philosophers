@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/13 19:54:22 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 23:18:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,40 @@ void	ft_assign_philo_timers(t_philo *philo)
 	}
 }
 
+void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
+{
+	if (philo_id == nbr_philos)
+	{
+		forks[0] = philo_id - 1;
+		forks[1] = 0;
+	}
+	else
+	{
+		forks[0] = philo_id ;
+		forks[1] = philo_id - 1;
+	}
+}
+
+void	ft_assign_all_forks(t_philo *philo)
+{
+	int	index;
+
+	index = 0;
+	while (index < philo->nbr_philos)
+	{
+		ft_assign_forks(philo->nbr_philos, philo->ph[index].id,
+			philo->ph[index].forks);
+		index++;
+	}
+	index = 0;
+	while (index < philo->nbr_philos)
+	{
+		printf("philo %d - fork0=>%d fork1=>%d\n", philo->ph[index].id, philo->ph[index].forks[0], philo->ph[index].forks[1]);
+		index++;
+	}
+
+}
+
 t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 {
 	size_t		index;
@@ -76,6 +110,7 @@ t_bool	ft_init_philosophers(t_philo *philo, size_t nbr_philos)
 	philo->dinner_start = ft_get_time_ms();
 	philo->should_stop_dinner = FALSE;
 	ft_assign_philo_timers(philo);
+	ft_assign_all_forks(philo);
 	if (nbr_philos == 1)
 	{
 		if (pthread_create(&philo->ph[index].ph_thread, NULL,
@@ -118,10 +153,8 @@ void	ft_create_philosophers(t_philo *philo, size_t nbr_philos)
 	ft_assign_philo_actions(philo);
 	philo->ph = (t_philosophers *)malloc(sizeof(t_philosophers) * nbr_philos);
 	ft_init_mutex(philo);
-	if (!ft_init_philosophers(philo, nbr_philos))
-		return ;
+	ft_init_philosophers(philo, nbr_philos);
 	ft_init_watcher(philo);
-	if (!ft_join_philosophers(philo, nbr_philos))
-		return ;
+	ft_join_philosophers(philo, nbr_philos);
 	ft_destroy_mutex(philo);
 }

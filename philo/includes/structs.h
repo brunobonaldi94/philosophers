@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 21:06:03 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/11 15:41:13 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 23:07:01 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philosophers
 {
 	pthread_t		ph_thread;
 	int				id;
-	int				fork;
+	int				forks[2];
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:19:27 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/13 19:54:27 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:33:20 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ t_bool	ft_check_all_philosophers_eaten_x_times(t_philo *philo)
 	return (TRUE);
 }
 
+t_bool	ft_die_condition(t_philosophers	*cur_ph)
+{
+	return (ft_get_elapsed_time(cur_ph->last_meal_time)
+			>= (t_time_ms)cur_ph->time_die);
+}
+
 t_bool	ft_should_die(t_philo *philo, int philo_id)
 {
 	t_bool			should_die;
@@ -34,8 +40,7 @@ t_bool	ft_should_die(t_philo *philo, int philo_id)
 
 	cur_ph = &philo->ph[philo_id -1];
 	pthread_mutex_lock(&cur_ph->last_meal_mutex);
-	should_die = (ft_get_elapsed_time(cur_ph->last_meal_time)
-			>= (t_time_ms)cur_ph->time_die);
+	should_die = ft_die_condition(cur_ph);
 	if (should_die)
 		ft_log_philo(philo, cur_ph->id, DIED);
 	pthread_mutex_unlock(&cur_ph->last_meal_mutex);
