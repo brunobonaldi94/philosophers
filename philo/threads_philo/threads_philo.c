@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/14 18:34:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:06:56 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,18 @@ void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
 	{
 		forks[0] = philo_id - 1;
 		forks[1] = 0;
+		if (philo_id % 2 != 0)
+		{
+			forks[0] = 0;
+			forks[1] = philo_id - 1;
+		}
 	}
 	else
 	{
-		forks[0] = philo_id ;
+		forks[0] = philo_id;
 		forks[1] = philo_id - 1;
 	}
+	
 }
 
 void	ft_assign_all_forks(t_philo *philo)
