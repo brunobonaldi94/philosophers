@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/13 21:12:08 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:49:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,21 @@ t_bool		ft_has_valid_args(int argc, char *argv[]);
 // THREADS
 // =============================================================================
 void		ft_create_philosophers(t_philo *philo, size_t nbr_philos);
-
+void		*ft_routine(void *philo);
+void		ft_assign_forks(int nbr_philos, int philo_id, int forks[2]);
+void		ft_assign_all_forks(t_philo *philo);
+void		ft_assign_philo_timers(t_philo *philo);
+void		ft_assign_philo_actions(t_philo *philo);
+t_bool		ft_launch_philo_threads(t_philo *philo, size_t nbr_philos);
 // =============================================================================
 // PHILO ROUTINE
 // =============================================================================
 void		ft_eat_routine(t_philo *philo, int philo_id);
 void		ft_sleep_routine(t_philo *philo, int philo_id);
 void		ft_think_routine(t_philo *philo, int philo_id);
-void		ft_assign_forks(int nbr_philos, int philo_id, int forks[2]);
+t_bool		ft_log_eating(t_philo *philo, int philo_id);
+void		ft_adjust_nbr_times_must_eat(t_philo *philo, int philo_id);
+void		set_meal_time(t_philo *philo, int philo_id);
 // =============================================================================
 // PHILO LOGGERS
 // =============================================================================
@@ -85,7 +92,11 @@ void		ft_stop_dinner(t_philo *philo, t_bool should_stop_dinner);
 t_bool		ft_should_die(t_philo *philo, int philo_id);
 t_bool		ft_die_condition(t_philosophers	*cur_ph);
 // =============================================================================
-// PHILO MUTEX
+// PHILO WATCHER
 // =============================================================================
 t_bool		ft_init_watcher(t_philo *philo);
+t_bool		ft_should_any_philo_die(t_philo *philo);
+t_bool		ft_should_die(t_philo *philo, int philo_id);
+t_bool		ft_die_condition(t_philosophers	*cur_ph);
+t_bool		ft_check_all_philosophers_eaten_x_times(t_philo *philo);
 #endif

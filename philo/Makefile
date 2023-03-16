@@ -20,9 +20,10 @@ SRCS	:=	philosophers.c \
 			$(UTILS)/ft_atoi.c $(UTILS)/ft_strdup.c \
 			$(ARGS_VALIDATION)/args_validation.c \
 			$(TIME_HANDLER)/time_handler.c \
-			$(THREADS_PHILO)/threads_philo.c $(THREADS_PHILO)/philo_loggers.c \
+			$(THREADS_PHILO)/philo_threads.c $(THREADS_PHILO)/philo_loggers.c \
 			$(THREADS_PHILO)/philo_routine.c  $(THREADS_PHILO)/philo_mutex.c \
-			$(THREADS_PHILO)/philo_watcher.c \
+			$(THREADS_PHILO)/philo_watcher.c $(THREADS_PHILO)/philo_threads_utils.c \
+			$(THREADS_PHILO)/philo_watcher_utils.c $(THREADS_PHILO)/philo_routine_utils.c\
 			$(FREE_PROGRAM)/free_program.c
 OBJS	:=	$(SRCS:.c=.o)
 

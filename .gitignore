@@ -5,3 +5,5 @@ philosophers
 /tests
 *.log
 /philo_humberto
+/test_results
+test.sh
