@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/15 20:52:20 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/15 22:36:57 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void	ft_think_routine(t_philo *philo, int philo_id)
 	if (ft_should_stop_dinner(philo))
 		return ;
 	ft_log_philo(philo, philo_id, THINKING);
+	usleep(500);
 }

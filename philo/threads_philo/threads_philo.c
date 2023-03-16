@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/15 20:57:04 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:10:55 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,18 @@ void	*ft_routine(void *philo)
 	p = (t_cur_philo *)philo;
 	while (!ft_should_stop_dinner(p->philo))
 	{
-		ft_eat_routine(p->philo, p->cur_philo->id);
-		ft_sleep_routine(p->philo, p->cur_philo->id);
-		ft_think_routine(p->philo, p->cur_philo->id);
+		if (p->cur_philo->id % 2)
+		{
+			ft_eat_routine(p->philo, p->cur_philo->id);
+			ft_sleep_routine(p->philo, p->cur_philo->id);
+			ft_think_routine(p->philo, p->cur_philo->id);
+		}
+		else
+		{
+			ft_think_routine(p->philo, p->cur_philo->id);
+			ft_eat_routine(p->philo, p->cur_philo->id);
+			ft_sleep_routine(p->philo, p->cur_philo->id);
+		}
 	}
 	free(philo);
 	return (NULL);
@@ -73,11 +82,6 @@ void	ft_assign_forks(int nbr_philos, int philo_id, int forks[2])
 	{
 		forks[0] = 0;
 		forks[1] = philo_id - 1;
-		if (philo_id % 2 != 0)
-		{
-			forks[0] = philo_id - 1;
-			forks[1] = 0;
-		}
 	}
 	else
 	{
