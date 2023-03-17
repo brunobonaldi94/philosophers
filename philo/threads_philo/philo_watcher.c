@@ -29,8 +29,10 @@ t_bool	ft_watch_philo(t_philo *philo)
 		if (ft_should_end_dinner(philo))
 		{
 			ft_stop_dinner(philo, TRUE);
+			usleep(100);
 			return (FALSE);
 		}
+		usleep(100);
 	}
 	return (TRUE);
 }

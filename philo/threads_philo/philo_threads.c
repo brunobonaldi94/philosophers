@@ -17,20 +17,13 @@ void	*ft_routine(void *philo)
 	t_cur_philo	*p;
 
 	p = (t_cur_philo *)philo;
+	if (p->cur_philo->id % 2)
+		usleep(500);
 	while (!ft_should_stop_dinner(p->philo))
 	{
-		if (p->cur_philo->id % 2)
-		{
-			ft_eat_routine(p->philo, p->cur_philo->id);
-			ft_sleep_routine(p->philo, p->cur_philo->id);
-			ft_think_routine(p->philo, p->cur_philo->id);
-		}
-		else
-		{
-			ft_think_routine(p->philo, p->cur_philo->id);
-			ft_eat_routine(p->philo, p->cur_philo->id);
-			ft_sleep_routine(p->philo, p->cur_philo->id);
-		}
+		ft_eat_routine(p->philo, p->cur_philo->id);
+		ft_sleep_routine(p->philo, p->cur_philo->id);
+		ft_think_routine(p->philo, p->cur_philo->id);
 	}
 	free(philo);
 	return (NULL);
