@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:40:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/16 19:32:11 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/18 22:00:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_log_philo(t_philo *philo, int philo_id, t_philo_status cur_status)
 
 void	ft_print_args(t_philo *philo)
 {
+	if (DEBUG == FALSE)
+		return ;
 	printf("nbr philos:%d\ntime_d:%d\ntime_eat:%d\ntime_sleep:%d\nnbr\
 	_times_must_eat:%d\n----------------------------------------------\
 	----------------------------------------------\n",
