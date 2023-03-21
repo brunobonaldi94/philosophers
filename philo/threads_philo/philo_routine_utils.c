@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/20 21:29:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:47:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	set_meal_time(t_philo *philo, int philo_id)
 void	ft_adjust_nbr_times_must_eat(t_philo *philo, int philo_id)
 {
 	pthread_mutex_lock(&philo->ph[philo_id -1].eaten_time_mutex);
-	philo->ph[philo_id -1].nbr_times_must_eat--;
+	if (philo->ph[philo_id -1].nbr_times_must_eat > 0)
+		philo->ph[philo_id -1].nbr_times_must_eat--;
 	pthread_mutex_unlock(&philo->ph[philo_id -1].eaten_time_mutex);
 }
 
