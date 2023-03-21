@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:23:54 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/03/16 19:50:33 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:35:02 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	ft_eat_routine(t_philo *philo, int philo_id)
 
 void	ft_sleep_routine(t_philo *philo, int philo_id)
 {
-	if (ft_should_stop_dinner(philo) || ft_should_die(philo, philo_id))
+	if (ft_should_stop_dinner(philo)
+		|| ft_should_die(philo, philo_id))
 		return ;
 	ft_log_philo(philo, philo_id, SLEEPING);
 	ft_usleep(philo->ph[philo_id - 1].time_sleep);

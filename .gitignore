@@ -6,5 +6,5 @@ philosophers
 *.log
 /philo_humberto
 /test_results
-test.sh
+test*.sh
 philo/philo
