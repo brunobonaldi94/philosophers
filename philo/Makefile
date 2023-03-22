@@ -17,8 +17,8 @@ CC		:=	cc
 CFLAGS	:=	-g3 -Wall -Werror -Wextra
 HEADERS	:=	includes
 SRCS	:=	philosophers.c \
-			$(UTILS)/ft_atoi.c $(UTILS)/ft_strdup.c \
-			$(ARGS_VALIDATION)/args_validation.c \
+			$(UTILS)/ft_atoi.c $(UTILS)/ft_strdup.c $(UTILS)/ft_strncmp.c \
+			$(ARGS_VALIDATION)/args_validation.c $(ARGS_VALIDATION)/args_validation_utils.c \
 			$(TIME_HANDLER)/time_handler.c \
 			$(THREADS_PHILO)/philo_threads.c $(THREADS_PHILO)/philo_loggers.c \
 			$(THREADS_PHILO)/philo_routine.c  $(THREADS_PHILO)/philo_mutex.c \
@@ -66,6 +66,5 @@ re:			fclean all
 valgrind:
 			@valgrind --tool=helgrind -s --log-fd=9 ./$(NAME) \
 			5 210 100 100 7  9>memcheck.log
-#3 400 100 100 7  9>memcheck.log
 
 .PHONY:		all clean fclean re

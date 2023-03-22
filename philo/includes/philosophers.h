@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/03/20 21:31:33 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:10:00 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@
 // =============================================================================
 int			ft_atoi(const char *nptr);
 char		*ft_strdup(const char *s);
+size_t		ft_strlen(const char *s);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 // =============================================================================
 // ARGS VALIDATION
 // =============================================================================
+t_bool		ft_is_number2(char *str);
+t_bool		ft_advance_plus_sign(char **str);
 t_bool		ft_has_valid_args(int argc, char *argv[]);
 
 // =============================================================================

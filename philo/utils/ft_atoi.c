@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:27:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/02/01 22:17:59 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:09:13 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,20 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
+static long long	check_over_under_flow(int sign_result, long long result)
+{
+	if (sign_result > 0 && result >= (long long)INT_MAX)
+		return ((long long)(INT_MAX));
+	if (sign_result < 0 && (-1 * result) <= (long long)INT_MIN)
+		return ((long long)(INT_MIN));
+	return (result);
+}
+
 int	ft_atoi(const char *nptr)
 {
-	const char	*nptr_ptr;
-	int			sign_result;
-	int			result;
+	const char		*nptr_ptr;
+	int				sign_result;
+	long long		result;
 
 	nptr_ptr = nptr;
 	result = 0;
@@ -53,5 +62,6 @@ int	ft_atoi(const char *nptr)
 		result = (result * 10) + (*nptr_ptr - '0');
 		nptr_ptr++;
 	}
+	result = check_over_under_flow(sign_result, result);
 	return (result * sign_result);
 }

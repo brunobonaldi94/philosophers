@@ -17,6 +17,8 @@ void	ft_log_philo(t_philo *philo, int philo_id, t_philo_status cur_status)
 	t_time_ms	current_time;
 
 	pthread_mutex_lock(&(philo->logger_mutex));
+	if (!ft_die_condition(&philo->ph[philo_id - 1]) && ft_should_stop_dinner(philo))
+		return ;
 	current_time = ft_get_elapsed_time(philo->dinner_start);
 	printf("%ld %d %s\n", current_time, philo_id,
 		philo->philo_actions[cur_status]);
